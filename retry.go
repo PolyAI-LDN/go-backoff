@@ -137,3 +137,13 @@ func Retry[T any](ctx context.Context, operation Operation[T], opts ...RetryOpti
 		}
 	}
 }
+
+type OperationError func() error
+
+func RetryError(ctx context.Context, operation OperationError, opts ...RetryOption) error {
+	wrapped := func() (interface{}, error) {
+		return struct{}{}, operation()
+	}
+	_, err := Retry(ctx, wrapped, opts...)
+	return err
+}
