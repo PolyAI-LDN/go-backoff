@@ -1,4 +1,4 @@
-module github.com/PolyAI-LDN/go-backoff
+module github.com/PolyAI-LDN/backoff/v5
 
 go 1.24
 
